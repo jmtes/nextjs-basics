@@ -6,9 +6,14 @@
 // You're just using JSX and React components instead!
 
 import Link from 'next/link';
+import Head from 'next/head';
 
 const FirstPost = () => (
   <>
+    <Head>
+      <title>First Post</title>
+    </Head>
+
     <h1>First Post</h1>
     <h2>
       <Link href='/'>

@@ -23,9 +23,31 @@ import Link from 'next/link';
 // throws an error, the rest of the app should still work.
 
 // Notes
-// If you need to link to an external page, just use a regular a tag.
-// If you need to add attributes like className, add them to the a tag,
+// If you need to link to an external page, just use a regular <a> tag.
+// If you need to add attributes like className, add them to the <a> tag,
 // not the Link tag. The Link should only have an href attribute.
+
+// For more, refer to the routing section of the Next.js docs.
+
+// STATIC ASSETS
+// Static files can be served under the top level public directory.
+
+// Files inside of this directory can be referenced from the root of the
+// app similarly to pages. Note how the logo image in the footer is referred.
+
+// If you wanted to add a new asset /images/me.jpg, the file path would be
+// public/images/me.jpg.
+
+// For more, refer to the Static File Serving section of the Next.js docs.
+
+// METADATA
+// Head is a React component built into Next.js that allows you to modify
+// the <head> metadata of a page. It's imported from the next/head module.
+
+// For more, see the API reference for next/head.
+// If you want to customize the <html> tag, you can do so by creating a
+// pages/_document.js file. Learn more in the custom Document
+// documentation.
 
 const Home = () => (
   <div className='container'>
