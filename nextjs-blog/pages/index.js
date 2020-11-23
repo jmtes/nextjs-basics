@@ -49,6 +49,17 @@ import Link from 'next/link';
 // pages/_document.js file. Learn more in the custom Document
 // documentation.
 
+// CSS STYLING
+// Next.js has built-in support for Styled-JSX, which is what is used in
+// this example. You can still use other popular CSS-in-JS libraries
+// such as Styled-Components or Emotion, but they don't have support
+// built-in.
+
+// There's also built-in support for CSS (Modules) and SASS, which allows
+// you to import CSS and SCSS files.
+
+// Using CSS libraries like Tailwind CSS is also supported.
+
 const Home = () => (
   <div className='container'>
     <Head>
