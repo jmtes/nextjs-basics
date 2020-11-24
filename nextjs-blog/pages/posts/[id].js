@@ -8,19 +8,21 @@ import Date from '../../components/date';
 
 import { getAllPostIds, getPostData } from '../../lib/posts';
 
-const Post = ({ postData: { title, id, date, contentHtml } }) => (
-  <>
+import utilStyles from '../../styles/utils.module.css';
+
+const Post = ({ postData: { title, date, contentHtml } }) => (
+  <Layout>
     <Head>
       <title>{title}</title>
     </Head>
-    <Layout>
-      {title}
-      <br />
-      <Date dateString={date} />
-      <br />
-      <div dangerouslySetInnerHTML={{ __html: contentHtml }}></div>
-    </Layout>
-  </>
+    <article>
+      <h1 className={utilStyles.headingXl}>{title}</h1>
+      <div className={utilStyles.lightText}>
+        <Date dateString={date} />
+      </div>
+      <div dangerouslySetInnerHTML={{ __html: contentHtml }} />
+    </article>
+  </Layout>
 );
 
 // getStaticPaths returns a list of possible values for the `id` in this
