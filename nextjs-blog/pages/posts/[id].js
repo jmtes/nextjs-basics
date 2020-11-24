@@ -1,20 +1,26 @@
 // DYNAMIC ROUTING
 // Pages wrapped in [] are dynamic routes in Next.js.
 
+import Head from 'next/head';
+
 import Layout from '../../components/layout';
+import Date from '../../components/date';
 
 import { getAllPostIds, getPostData } from '../../lib/posts';
 
 const Post = ({ postData: { title, id, date, contentHtml } }) => (
-  <Layout>
-    {title}
-    <br />
-    {id}
-    <br />
-    {date}
-    <br />
-    <div dangerouslySetInnerHTML={{ __html: contentHtml }}></div>
-  </Layout>
+  <>
+    <Head>
+      <title>{title}</title>
+    </Head>
+    <Layout>
+      {title}
+      <br />
+      <Date dateString={date} />
+      <br />
+      <div dangerouslySetInnerHTML={{ __html: contentHtml }}></div>
+    </Layout>
+  </>
 );
 
 // getStaticPaths returns a list of possible values for the `id` in this
