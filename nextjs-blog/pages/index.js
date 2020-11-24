@@ -129,6 +129,7 @@ const Home = ({ allPostsData }) => (
 // to resolve them first!"
 
 // See below for an example on how to use getStaticProps!
+// For more, see the Data Fetching section of the Next.js docs.
 
 export const getStaticProps = async () => {
   const allPostsData = getSortedPostsData();
@@ -156,5 +157,42 @@ export const getStaticProps = async () => {
 
 // It's also worth noting that getStaticProps can only be exported from a
 // page (that is, a file under the top-level pages directory).
+
+// SERVER SIDE RENDERING
+// The process of using server-side rendering is pretty much identical to
+// the one used for static generation.
+// Simply export an async function called getServerSideProps instead of
+// getStaticProps!
+
+// See the usage example below!
+
+// The context param contains request-specific data such as query params,
+// headers, etc.
+// export const getServerSideProps = (context) => {
+//   return {
+//     props: {}
+//   };
+// };
+
+// Again, use SSR only if you need to pre-render a page whose data must be
+// fetched at request time!
+
+// For more, see the Data Fetching section of the Next.js docs!
+
+// CLIENT SIDE RENDERING
+// Do this if you do not need to pre-render page data.
+// You're still pre-rendering the parts of the page that do not require
+// external data. External data is only fetched from the client using JS
+// once the page loads in their browser though, after which the remaining
+// parts of the page are populated.
+
+// A use case for this approach is for a user dashboard page. Because a
+// dashboard is a private, user-specific page, SEO is irrelevant and no pre-
+// rendering is needed. Additionally, the data on a dashboard is frequently
+// updated, which requires request-time data fetching.
+
+// The Next.js team created a React hook for data fetching called useSWR.
+// It's highly recommended for fetching data on the client side. See the
+// SWR documentation for more.
 
 export default Home;
