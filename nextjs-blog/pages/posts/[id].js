@@ -5,13 +5,15 @@ import Layout from '../../components/layout';
 
 import { getAllPostIds, getPostData } from '../../lib/posts';
 
-const Post = ({ postData }) => (
+const Post = ({ postData: { title, id, date, contentHtml } }) => (
   <Layout>
-    {postData.title}
+    {title}
     <br />
-    {postData.id}
+    {id}
     <br />
-    {postData.date}
+    {date}
+    <br />
+    <div dangerouslySetInnerHTML={{ __html: contentHtml }}></div>
   </Layout>
 );
 
@@ -32,7 +34,7 @@ export const getStaticPaths = async () => {
 // containing an `id` key. The value of `paths` in the object returned by
 // getStaticPaths is an array of these objects containing a `params` key.
 export const getStaticProps = async ({ params: { id } }) => {
-  const postData = getPostData(id);
+  const postData = await getPostData(id);
 
   return { props: { postData } };
 };
