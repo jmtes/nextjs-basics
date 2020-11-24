@@ -4,6 +4,8 @@ import Link from 'next/link';
 import Layout, { siteTitle } from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
 
+import { getSortedPostsData } from '../lib/posts';
+
 // LINKS
 // In the h1, a Link component is used to wrap an a tag to allow for
 // client-side navigation within the app.
@@ -69,7 +71,7 @@ import utilStyles from '../styles/utils.module.css';
 
 // For more, see the CSS section of the Next.js documentation.
 
-const Home = () => (
+const Home = ({ allPostsData }) => (
   <Layout home>
     <Head>
       <title>{siteTitle}</title>
@@ -84,7 +86,75 @@ const Home = () => (
         <a href='https://nextjs.org/learn'>our Next.js tutorial</a>.)
       </p>
     </section>
+    <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
+      <h2 className={utilStyles.headingLg}>Blog</h2>
+      <ul className={utilStyles.list}>
+        {allPostsData.map(({ id, date, title }) => (
+          <li className={utilStyles.listItem} key={id}>
+            {title}
+            <br />
+            {id}
+            <br />
+            {date}
+          </li>
+        ))}
+      </ul>
+    </section>
   </Layout>
 );
+
+// STATIC GENERATION
+// Pages will be generated during build time and reused for each request.
+// Can be done with or without data.
+
+// Use static generation as opposed to server-side rendering whenever you
+// can! As a rule of thumb you should only use server-side rendering if
+// your page contains data that needs to be constantly updated or that
+// changes on every request.
+
+// STATIC GENERATION WITH DATA
+// For some pages, you might not be able to render the HTML without fetching
+// some external data first.
+// You might need to access the file system, fetch from an external API,
+// query your DB, etc. at build time.
+
+// This is when getStaticProps comes in!
+// It's an async function exported alongside a page component that runs at
+// build time in production. Inside it you can fetch external data and
+// return an object containing a `props` key, which, as you may be able to
+// guess, will be passed to the page component as props.
+
+// Essentially, getStaticProps tells Next.js, "Hey, this page has some data
+// dependencies, so when you pre-render this page at build time, make sure
+// to resolve them first!"
+
+// See below for an example on how to use getStaticProps!
+
+export const getStaticProps = async () => {
+  const allPostsData = getSortedPostsData();
+
+  return { props: { allPostsData } };
+
+  // Example to fetch from external API
+  // Next.js polyfills fetch on both the client and server, so you don't
+  // have to worry about importing it!
+  const res = await fetch('..');
+  return res.json();
+
+  // You can do Prisma queries here too, I imagine!
+  // getStaticProps only ever runs on the server-side, which means you can
+  // write code sich as direct database queries without them being sent to
+  // browsers!
+  // Ooh, this means you can probably use this to use the Imgur API or
+  // something without having to expose your key/token in the client-side
+  // code!
+};
+
+// Note that, because getStaticProps is meant to be run at build time, you
+// won't be able to use data that's only available during request time, such
+// as query parameters or HTTP headers.
+
+// It's also worth noting that getStaticProps can only be exported from a
+// page (that is, a file under the top-level pages directory).
 
 export default Home;
