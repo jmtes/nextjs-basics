@@ -63,6 +63,12 @@ import utilStyles from '../styles/utils.module.css';
 
 // Using CSS libraries like Tailwind CSS is also supported.
 
+// You can use the classnames library to toggle classes.
+// You can use SCSS/SASS via CSS Modules using the .module.scss or
+// .module.sass extensions. Just be sure to install SASS first!
+
+// For more, see the CSS section of the Next.js documentation.
+
 const Home = () => (
   <Layout home>
     <Head>
