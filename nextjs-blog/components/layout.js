@@ -1,3 +1,4 @@
+// COMPONENT-LEVEL STYLES WITH CSS MODULES
 // This is a layout component that can be shared across all pages and
 // contains styling.
 
