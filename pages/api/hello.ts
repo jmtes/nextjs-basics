@@ -1,9 +1,11 @@
+import { NextApiRequest, NextApiResponse } from 'next';
+
 // API ROUTES
 // API Routes let you create an API endpoint inside a Next.js app.
 
 // Below is an example of how to do so:
 
-export default (req, res) => {
+export default (_: NextApiRequest, res: NextApiResponse) => {
   res.status(200).json({ text: 'Hello' });
 };
 
@@ -20,7 +22,7 @@ export default (req, res) => {
 // client bundle, just like `getStaticProps` and `getStaticPaths`!
 
 // See the example below:
-export const saveEmailData = (req, res) => {
+export const saveEmailData = (req: NextApiRequest, res: NextApiResponse) => {
   const email = req.body.email;
 
   // Then save email to your database, etc...

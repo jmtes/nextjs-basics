@@ -10,8 +10,14 @@ import { getAllPostIds, getPostData } from '../../lib/posts';
 
 import utilStyles from '../../styles/utils.module.css';
 
-const Post = ({ postData: { title, date, contentHtml } }) => (
-  <Layout>
+import { GetStaticProps, GetStaticPaths, GetServerSideProps } from 'next';
+
+const Post = ({
+  postData: { title, date, contentHtml }
+}: {
+  postData: { title: string; date: string; contentHtml: string };
+}) => (
+  <Layout home={false}>
     <Head>
       <title>{title}</title>
     </Head>
@@ -27,7 +33,7 @@ const Post = ({ postData: { title, date, contentHtml } }) => (
 
 // getStaticPaths returns a list of possible values for the `id` in this
 // filename.
-export const getStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
   const paths = getAllPostIds();
 
   return { paths, fallback: false };
@@ -58,8 +64,8 @@ export const getStaticPaths = async () => {
 // Note that we're accepting a `params` param, which should be an object
 // containing an `id` key. The value of `paths` in the object returned by
 // getStaticPaths is an array of these objects containing a `params` key.
-export const getStaticProps = async ({ params: { id } }) => {
-  const postData = await getPostData(id);
+export const getStaticProps: GetStaticProps = async ({ params: { id } }) => {
+  const postData = await getPostData(id as string);
 
   return { props: { postData } };
 };

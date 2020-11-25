@@ -1,3 +1,5 @@
+import { AppProps } from 'next/app';
+
 // GLOBAL STYLES
 // Next.js has support for when you want some CSS to be loaded by every
 // page on your app.
@@ -15,6 +17,8 @@
 // Notice that it doesn't need/use the .module.css extension.
 import '../styles/global.css';
 
-const App = ({ Component, pageProps }) => <Component {...pageProps} />;
+const App = ({ Component, pageProps }: AppProps) => (
+  <Component {...pageProps} />
+);
 
 export default App;

@@ -8,6 +8,8 @@ import utilStyles from '../styles/utils.module.css';
 
 import { getSortedPostsData } from '../lib/posts';
 
+import { GetStaticProps, GetStaticPaths, GetServerSideProps } from 'next';
+
 // LINKS
 // In the h1, a Link component is used to wrap an a tag to allow for
 // client-side navigation within the app.
@@ -73,7 +75,11 @@ import { getSortedPostsData } from '../lib/posts';
 
 // For more, see the CSS section of the Next.js documentation.
 
-const Home = ({ allPostsData }) => (
+const Home = ({
+  allPostsData
+}: {
+  allPostsData: { date: string; title: string; id: string }[];
+}) => (
   <Layout home>
     <Head>
       <title>{siteTitle}</title>
@@ -135,7 +141,7 @@ const Home = ({ allPostsData }) => (
 // See below for an example on how to use getStaticProps!
 // For more, see the Data Fetching section of the Next.js docs.
 
-export const getStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const allPostsData = getSortedPostsData();
 
   return { props: { allPostsData } };

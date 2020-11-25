@@ -24,7 +24,13 @@ import utilStyles from '../styles/utils.module.css';
 const name = 'Juno Tesoro';
 export const siteTitle = 'My First Next.js Site!';
 
-const Layout = ({ children, home }) => (
+const Layout = ({
+  children,
+  home
+}: {
+  children: React.ReactNode;
+  home?: boolean;
+}) => (
   <div className={styles.container}>
     <Head>
       <link rel='icon' href='/favicon.ico' />
